@@ -1,0 +1,10 @@
+// targeted markup language
+
+<div
+    <img />
+    <p style: 'It is style' class: 'classTagP' * It is tag p * </ p>
+    <p * What? * </ p>
+    <input />
+    <% * const src = 'src'
+    Fjjjjjf Tax * % >
+</div >
