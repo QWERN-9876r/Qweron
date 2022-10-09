@@ -3,15 +3,17 @@ const fs = require('fs'),
  Lexer = require('./lexer/lexer').Lexer,
  Parser = require('./parser/parser').Parser;
 
-
-
-fs.readFile('../test/index.tml', 'utf-8', function(err, data){
+fs.readFile('../test/index.tml', 'utf-8', function Tml(err, data){
     if(err){
         throw err
-        return
     }
-    // console.log(Lexer(data, Dictionary))
-    console.log(Parser(Lexer(data, Dictionary), Dictionary))
-
-
+    fs.writeFile('tml.js', Parser(Lexer(data, Dictionary)), function(err){
+        if(err) {
+            throw err
+        }
+    
+    })
+    
 })
+
+

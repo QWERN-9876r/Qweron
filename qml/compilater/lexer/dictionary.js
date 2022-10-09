@@ -1,5 +1,4 @@
 
-
 const Dictionary = {
     tagNames: [
         'div', 'img', 'input', '%', 'h1', 'button', 'p'

@@ -5,6 +5,13 @@
     p style: 'It is style' class: 'classTagP' * It is tag p * />
     p * What? * />
     input />
-    % * const src = 'src'
-    Fjjjjjf Tax * % /> 
+    % * 
+    
+    
+    const src = 'src';
+    console.log("It's SCRIPT")
+    
+    
+    
+    * % /> 
 div />
