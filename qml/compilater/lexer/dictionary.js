@@ -1,10 +1,13 @@
 
 const Dictionary = {
     tagNames: [
-        'div', 'img', 'input', '%', 'h1', 'button', 'p'
+        'div', 'img', 'input', '%', 'settings', 'h1', 'button', 'p', 'style'
     ],
     parametrs: [
-        'class', 'style'
+        'class:', 'style:'
+    ],
+    settings: [
+        'ErrorMessages:'
     ]
 }
 

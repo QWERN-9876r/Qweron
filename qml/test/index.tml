@@ -1,8 +1,8 @@
-// targeted markup language
-
-/> div />
+// targeted markup language 
+/> settings ErrorMessages: 'off' />
+ div />
     img />
-    p style: 'It is style' class: 'classTagP' * It is tag p * />
+    p class: 'classTagP' * It is tag p * />
     p * What? * />
     input />
     % * 
@@ -14,4 +14,8 @@
     
     
     * % /> 
+    h1 * Hello world * />
+    style * .classTagP {
+        color: red;
+    } * />
 div />

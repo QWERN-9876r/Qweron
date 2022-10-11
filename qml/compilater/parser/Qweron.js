@@ -60,12 +60,12 @@ module.exports.Qweron = function() {
     Data.Create.html = function(el, children, features){
         try{
             const element = document.createElement(el)
-            if(typeof features === obj){
+            if(features && typeof features === obj){
                 if(features.className){element.className = features.className}
                 if(features.txt){element.innerHTML = features.txt} // В txt можно передать html
-                if(features.src){element.src = features.src}}
+                if(features.src){element.src = features.src}
                 if(features.onclick){element.onclick = features.onclick}
-                if(typeof features.style === obj){CreateStyle(element, features.style)}
+                if(typeof features.style === obj){CreateStyle(element, features.style)}}
             if(typeof children === obj){children.map(child => {
                 element.append(child)
             })
