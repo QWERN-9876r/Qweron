@@ -1,21 +1,15 @@
 // targeted markup language 
-/> settings ErrorMessages: 'off' />
- div />
-    img />
-    p class: 'classTagP' * It is tag p * />
-    p * What? * />
-    input />
-    % * 
+<m>
+<div class="container">
+    <h1> Hello world </h1>
+    <button> button </button>
     
-    
-    const src = 'src';
-    console.log("It's SCRIPT")
-    
-    
-    
-    * % /> 
-    h1 * Hello world * />
-    style * .classTagP {
-        color: red;
-    } * />
-div />
+</div> </m>
+
+
+<s> function Hello() {console.log('Hello world')}; Hello(); const what = 'what'; </s>
+
+<st>button {color: red;}
+.container {
+    margin: 2rem;
+}</st>
