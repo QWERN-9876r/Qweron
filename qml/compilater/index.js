@@ -1,18 +1,45 @@
 const fs = require('fs'),
- Dictionary = require('./lexer/dictionary').Dictionary,
  Lexer = require('./lexer/lexer').Lexer,
  Parser = require('./parser/parser').Parser;
 
-fs.readFile('../test/index.tml', 'utf-8', function Tml(err, data){
+fs.readFile('../test/index.tml', 'utf-8', function(err, data){
+    
+    
     if(err){
         throw err
     }
-    fs.writeFile('tml.js', Parser(Lexer(data, Dictionary)), function(err){
+    if(Lexer(data).import.length) {
+
+        var DataArray
+        Lexer(data).import.map(function (importObj) {
+            this.DA = new Array();
+            fs.readFile(`../test/${importObj.path}.tml`, 'utf-8',(err, dataImport) => {
+                
+            if(!this.DA.length){this.DA.push(data);}
+                if(err){throw err}
+                
+                this.DA.push(dataImport)
+                if(Lexer(data).import.length === (this.DA.length - 1)) {
+                Lexer(this.DA)
+            }
+            }
+            )
+            
+        })
+        
+        
+        
+    } else {
+        var DataArray = new Array();
+    DataArray.push(data)
+    fs.writeFile('tml.js', Parser(Lexer(DataArray)), function(err){
         if(err) {
             throw err
         }
     
     })
+    }
+    
     
 })
 

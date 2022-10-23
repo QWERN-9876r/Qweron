@@ -1,0 +1,6 @@
+<m>
+<div class="container">
+    <h1 id="hw"> Hello from file </h1>
+    <button onclick="MyFile()"> go to file 2 </button>
+    
+</div> </m>

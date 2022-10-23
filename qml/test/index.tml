@@ -1,19 +1,26 @@
-// targeted markup language 
+<import>
+ MyFile: 'file'
+ MyFile2: 'file2'
+</import>
 <m>
-<div class="container">
-    <h1 id="hw"> Hello world </h1>
-    <button> button </button>
-    
-</div> </m>
+    <div class="container">
+        <h1 id="hw"> Hello world </h1>
+        <button onclick="MyFile()"> button </button>
+        
+    </div> 
+</m>
 
 
 <s>
  var what = 'what' 
  Upgrade("#hw", {txt: 'Hello'})
 
+
 </s>
 
-<st>button {color: red;}
-.container {
-    margin: 2rem;
-}</st>
+<st>
+    button {color: red;}
+    .container {
+        margin: 2rem;
+}
+</st>

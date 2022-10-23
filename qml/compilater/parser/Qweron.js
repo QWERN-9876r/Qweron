@@ -9,5 +9,6 @@ module.exports.Qweron = function() {
             if(changes.onclick){el.onclick = changes.onclick};
             if(changes.placeHolder){el.placeHolder = changes.placeHolder};
         }
+        
     } 
 }
