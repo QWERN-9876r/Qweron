@@ -1,7 +1,11 @@
 <import>
- MyFile: 'file'
- MyFile2: 'file2'
+ MyFile: 'test/file'
+ MyFile2: 'test/file2'
 </import>
+<settings> ErrorMessages: off</settings>
+<settings> WarningMessages: off</settings>
+
+<name>  __Main__  </name>
 <m>
     <div class="container">
         <h1 id="hw"> Hello world </h1>

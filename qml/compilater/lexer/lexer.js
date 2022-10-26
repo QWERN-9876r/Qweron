@@ -22,6 +22,8 @@ function Lexer(dataArray) {
             if(data.split('<s>')[1]){lexem.script = String(data.split('<s>')[1]).split('</s>')[0]}
             if(data.split('<m>')[1]){lexem.html = String(data.split('<m>')[1]).split('</m>')[0]}
             if(data.split('<st>')[1]){lexem.style = String(data.split('<st>')[1]).split('</st>')[0]}
+            if(data.split('<settings>')[1]){lexem.settings = String(data.split('<settings>')[1]).split('</settings>')[0]}
+            if(data.split('<name>')[1]){lexem.namePage = String(data.split('<name>')[1]).split('</name>')[0]}
             return lexem
     }
     var lexemArray = new Array();
@@ -45,6 +47,8 @@ function Lexer(dataArray) {
         if(data.split('<s>')[1]){lexem.script = String(data.split('<s>')[1]).split('</s>')[0]}
         if(data.split('<m>')[1]){lexem.html = String(data.split('<m>')[1]).split('</m>')[0]}
         if(data.split('<st>')[1]){lexem.style = String(data.split('<st>')[1]).split('</st>')[0]}
+        if(data.split('<settings>')[1]){lexem.settings = String(data.split('<settings>')[1]).split('</settings>')[0]}
+        if(data.split('<name>')[1]){lexem.namePage = String(data.split('<name>')[1]).split('</name>')[0]}
         lexemArray.push(lexem)
         if(lexemArray.length === dataArray.length){;Parser(lexemArray)}
     

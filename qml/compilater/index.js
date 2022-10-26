@@ -13,7 +13,7 @@ fs.readFile('../test/index.tml', 'utf-8', function(err, data){
         var DataArray
         Lexer(data).import.map(function (importObj) {
             this.DA = new Array();
-            fs.readFile(`../test/${importObj.path}.tml`, 'utf-8',(err, dataImport) => {
+            fs.readFile(`../${importObj.path}.tml`, 'utf-8',(err, dataImport) => {
                 
             if(!this.DA.length){this.DA.push(data);}
                 if(err){throw err}
