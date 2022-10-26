@@ -1,17 +1,29 @@
-<import>
+2<import>
  MyFile: 'test/file'
  MyFile2: 'test/file2'
 </import>
 <settings> ErrorMessages: off</settings>
 <settings> WarningMessages: off</settings>
+<save> top: {<div class="top">
+<nav>
+    <h4>Страница1</h4>
+    <h4>Страница2</h4>
+    <h4>Страница3</h4>
+    <h4>Страница4</h4>
+</nav>
+</div>} </save>
 
 <name>  __Main__  </name>
 <m>
+    <top>
+    <top>
+    <top>
+    <top>
+    <top>
     <div class="container">
-        <h1 id="hw"> Hello world </h1>
-        <button onclick="MyFile()"> button </button>
-        
+        <button onclick="MyFile()">gg</button>
     </div> 
+    
 </m>
 
 
@@ -23,8 +35,12 @@
 </s>
 
 <st>
-    button {color: red;}
-    .container {
-        margin: 2rem;
-}
+    .top {
+        background-color: grey;
+        display: flex;
+    }
+    nav {
+        color: white;
+
+    }
 </st>
