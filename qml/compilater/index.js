@@ -2,7 +2,7 @@ const fs = require('fs'),
  Lexer = require('./lexer/lexer').Lexer,
  Parser = require('./parser/parser').Parser;
 
-fs.readFile('../test/index.tml', 'utf-8', function(err, data){
+fs.readFile('../test/index.sin', 'utf-8', function(err, data){
     
     
     if(err){
@@ -13,7 +13,7 @@ fs.readFile('../test/index.tml', 'utf-8', function(err, data){
         var DataArray
         Lexer(data).import.map(function (importObj) {
             this.DA = new Array();
-            fs.readFile(`../${importObj.path}.tml`, 'utf-8',(err, dataImport) => {
+            fs.readFile(`../${importObj.path}.sin`, 'utf-8',(err, dataImport) => {
                 
             if(!this.DA.length){this.DA.push(data);}
                 if(err){throw err}
@@ -32,7 +32,7 @@ fs.readFile('../test/index.tml', 'utf-8', function(err, data){
     } else {
         var DataArray = new Array();
     DataArray.push(data)
-    fs.writeFile('tml.js', Parser(Lexer(DataArray)), function(err){
+    fs.writeFile('singleScript.js', Parser(Lexer(DataArray)), function(err){
         if(err) {
             throw err
         }
