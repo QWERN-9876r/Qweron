@@ -1,0 +1,19 @@
+.top {
+    background-color: grey;
+    display: flex;
+    flex-wrap: wrap;
+}
+nav {
+    color: white;
+    width: 70%;
+    justify-content: space-between;
+    display: flex;
+}
+nav h4 {
+    margin-left: 8px;
+    cursor: pointer;
+    font-family: sans-serif;
+    position: fixed;
+    background-color: rgb(177, 166, 166);
+    background-color: rgb(204, 195, 195);
+}

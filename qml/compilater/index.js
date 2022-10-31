@@ -3,8 +3,7 @@ const fs = require('fs'),
  Parser = require('./parser/parser').Parser;
 
 fs.readFile('../test/index.sin', 'utf-8', function(err, data){
-    
-    
+      
     if(err){
         throw err
     }

@@ -1,27 +1,90 @@
-2<import>
- MyFile: 'test/file'
- MyFile2: 'test/file2'
+<import>
+ About: 'test/file'
+ Documentation: 'test/file2'
 </import>
 <settings> ErrorMessages: off</settings>
 <settings> WarningMessages: off</settings>
-<save> top: {<div class="top">
+<save> top: |<div class="top">
 <nav>
-    <h4>Страница1</h4>
-    <h4>Страница2</h4>
-    <h4>Страница3</h4>
-    <h4>Страница4</h4>
+    <h4 onclick="About()">About</h4>
+    <h4 onclick="Documentation()">Documentation</h4>
+    <h4 onclick="__Main__()">Page3</h4>
+    <h4>Page4</h4>
 </nav>
-</div>} </save>
+</div>|
+save topStyle: |.top {
+        position: fixed;
+        left: 0;
+        top: 0;
+        width: 100%;
+        background-color: rgb(19, 16, 16);
+        display: flex;
+        flex-wrap: wrap;
+}
+nav {
+    color: white;
+    width: 70%;
+    justify-content: space-between;
+    display: flex;
+}
+nav h4 {
+    margin-left: 8px;
+    cursor: pointer;
+    font-family: sans-serif;
+}
+.mainLogo img {
+    position: relative;
+    top: -15%;
+    width: 25rem;
+    height: 110%;
+    align-items: center;
+    left: 32.5%;
+}
+.mainLogo button {
+    transition: 0.4s;
+    position: relative;
+    top: -20%;
+    left: 10%;
+    border-radius: 1rem;
+    background-color: black;
+    color: white;
+    font-size: 1rem;
+    font-family: sans-serif;
+    padding: 8px;
+    cursor: pointer;
+}
+.mainLogo button:hover {
+    background-color: rgb(204, 195, 195);
+    color: rgb(19, 16, 16);
+}
+.mainLogo {
+    position: absolute;
+    left: 0;
+    top: 10%;
+    height: 60%;
+    width: 100%;
+}
+.container {
+    margin: 1rem;
+}
+.text {
+    position: absolute;
+    top: 70%;
+    font-family: sans-serif;
+}
+|</save>
 
 <name>  __Main__  </name>
 <m>
     <top>
-    <top>
-    <top>
-    <top>
-    <top>
     <div class="container">
-        <button onclick="MyFile()">gg</button>
+        <div class="mainLogo">
+            <img src="./SingleScript.png" >
+            <button>Repository from Github</button>
+        </div>
+        <div class="text">
+            <p>SingleScript - It is a programming language designed to solve WEB development tasks!</p>
+        </div>
     </div> 
     
 </m>
@@ -29,18 +92,9 @@
 
 <s>
  var what = 'what' 
- Upgrade("#hw", {txt: 'Hello'})
-
 
 </s>
 
 <st>
-    .top {
-        background-color: grey;
-        display: flex;
-    }
-    nav {
-        color: white;
-
-    }
+    <topStyle>
 </st>

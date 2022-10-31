@@ -3,7 +3,7 @@ const { Parser } = require("../parser/parser");
 
 function Lexer(dataArray) {
     if(typeof dataArray === 'string') {
-            const data = String(dataArray),
+            let data = String(dataArray),
              lexem = new Object();
             if(data.split('<import>'[1])){const importData = String(data.split('<import>')[1]).split('</import>')[0];
             lexem.import = new Array();
@@ -27,7 +27,7 @@ function Lexer(dataArray) {
             
             if(saveArray){
                 saveArray.map(save => {
-                    data.replace(`<${save.name}>`, save.script)
+                    data = data.replaceAll(`<${save.name}>`, save.script)
                 }) 
             }
             if(data.split('<s>')[1]){lexem.script = String(data.split('<s>')[1]).split('</s>')[0]}
@@ -56,15 +56,29 @@ function Lexer(dataArray) {
         })
         
         }
+        
         if(data.split('<save>')[1]){if(!saveArray){var saveArray = new Array()}
+
+        
             const txt = String(data.split('<save>')[1]).split('</save>')[0];
-            saveArray.push({name: txt.split(':')[0].replace(/\n/g,'').replace(/\s/,''),
-            script: String(txt.split('{')[1]).split('}')[0]}) }
+            txt.split('save').map(oneSave => {
+            
+                saveArray.push({name: oneSave.split(':')[0].replace(/\n/g,'').replace(/\s/g,''),
+                script: oneSave.split('|')[1]})
+            })
+            
+            }
+            
             
             if(saveArray){
+                console.log(saveArray)
                 saveArray.map(save => {
                     data = data.replaceAll(`<${save.name}>`, save.script)
-                    
+                    console.log(data)
+                    dataArray.map(function(oneEl){  
+                        dataArray.push(oneEl.replaceAll(`<${save.name}>`, save.script))
+                        dataArray.shift()
+                    }) 
                 }) 
             }
             if(data.split('<s>')[1]){lexem.script = String(data.split('<s>')[1]).split('</s>')[0]}
