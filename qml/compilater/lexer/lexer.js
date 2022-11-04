@@ -71,15 +71,26 @@ function Lexer(dataArray) {
             
             
             if(saveArray){
-                console.log(saveArray)
                 saveArray.map(save => {
                     data = data.replaceAll(`<${save.name}>`, save.script)
-                    console.log(data)
                     dataArray.map(function(oneEl){  
                         dataArray.push(oneEl.replaceAll(`<${save.name}>`, save.script))
                         dataArray.shift()
                     }) 
                 }) 
+            }
+            if(data.split('<var>')[1]){
+                const txt = String(data.split('<var>')[1]).split('</var>')[0]
+                lexem.variable = new Array()
+                txt.replace(/\n/g,';').split(';').forEach(variable => {
+                    if(variable.split(':')[0].replace(/\s/g,'')){
+                        lexem.variable.push({name: variable.split(':')[0].replace(/\s/g,''),
+                content: String(variable.split(':')[1]).split('|')[0], type: variable.split('|')[1]
+                })
+                    }
+                    
+                })
+                console.log(lexem.variable)
             }
             if(data.split('<s>')[1]){lexem.script = String(data.split('<s>')[1]).split('</s>')[0]}
             if(data.split('<m>')[1]){lexem.html = String(data.split('<m>')[1]).split('</m>')[0]}

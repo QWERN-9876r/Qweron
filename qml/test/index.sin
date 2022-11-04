@@ -4,6 +4,11 @@
 </import>
 <settings> ErrorMessages: off</settings>
 <settings> WarningMessages: off</settings>
+<var>
+ Counter: 0 |textContent|
+ Color: 'red' |style.color|
+ What: 'what' |textContent|
+</var>
 <save> top: |<div class="top">
 <nav>
     <h4 onclick="About()">About</h4>
@@ -84,15 +89,27 @@ nav h4 {
         </div>
         <div class="text">
             <p>SingleScript - It is a programming language designed to solve WEB development tasks!</p>
+            <h1 class="c_Counter c_Color">|Counter|</h1>
+            <button id="btn" class="c_Counter">button</button>
         </div>
+        
     </div> 
     
 </m>
 
 
 <s>
- var what = 'what' 
-
+function plusCounte() {
+    ++|Counter|
+    |Counter.Update()|
+    |Color| = 'blue'
+    |Color.Update()|
+}
+ 
+ const what = 'what'
+ |ph| document.getElementById('btn').onclick = plusCounte
+ |ph| console.log(document.getElementsByClassName('c_Counter'))
+ 
 </s>
 
 <st>
