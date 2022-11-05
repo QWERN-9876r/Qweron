@@ -88,9 +88,9 @@ nav h4 {
             <button>Repository from Github</button>
         </div>
         <div class="text">
-            <p>SingleScript - It is a programming language designed to solve WEB development tasks!</p>
+            <p class="c_What">SingleScript - It is a programming language designed to solve WEB development tasks!</p>
             <h1 class="c_Counter c_Color">|Counter|</h1>
-            <button id="btn" class="c_Counter">button</button>
+            <button id="btn" class="c_Counter c_Color">button</button>
         </div>
         
     </div> 
@@ -99,12 +99,13 @@ nav h4 {
 
 
 <s>
+
 function plusCounte() {
     ++|Counter|
-    |Counter.Update()|
     |Color| = 'blue'
-    |Color.Update()|
+    |What| = |What| + ' what'
 }
+
  
  const what = 'what'
  |ph| document.getElementById('btn').onclick = plusCounte
