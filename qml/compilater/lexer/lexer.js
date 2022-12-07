@@ -1,104 +1,67 @@
-const { Parser } = require("../parser/parser");
+const { Parser } = require("../parser/parser"),
+SimpleTags = require('./dictionary').SimpleTags,
+MainFunction = require('./global').MainFunction,
+GetTagContent = require('./global').GetTagContent,
+ReadImports = require('./readImports').ReadImports;
+
+// ______________SimpleTags________________
+function SimpleTagsDataFunction( lexem, data ) {
+    const SimpleTagsData = SimpleTags.map(
+        tagName => 
+        (data.split(`<${tagName}>`)[1]) ? GetTagContent( tagName, data ) : null
+    )  
+    lexem.script = SimpleTagsData[0]
+    lexem.html = SimpleTagsData[1]
+    lexem.style = SimpleTagsData[2]
+    lexem.settings = SimpleTagsData[3]
+    lexem.namePage = SimpleTagsData[4]
+
+    return lexem
+}        
+//________________________________________
 
 
 function Lexer(dataArray) {
-    if(typeof dataArray === 'string') {
+    if( typeof dataArray === 'string' ) {
             let data = String(dataArray),
              lexem = new Object();
-            if(data.split('<import>'[1])){const importData = String(data.split('<import>')[1]).split('</import>')[0];
-            lexem.import = new Array();
-            importData.replace(/\n/g, ';').split(";").map(function (importStr){
-                if(!importStr.replace(/\n/g,'').replace(/\s/g, '')) {return}
-                const OneImport = new Object(null);
-                // Сбор данных из <import>
-                if( importStr.split(":").length ) { OneImport.name = importStr.split(':')[0].replace(':', '').replace(/\s/g,''); }
-                if( importStr.split("'").length ) {
-                    OneImport.path = importStr.split("'")[1]
-                    lexem.import.push(OneImport);
-                }    
-            })
-             
-            }
+            if( data.split('<import>'[1]) ) [ data, lexem ] = ReadImports( data, lexem )
             
-            if(data.split('<save>')[1]){if(!saveArray){var saveArray = new Array()}
-            const txt = String(data.split('<save>')[1]).split('</save>')[0];
-            saveArray.push({name: txt.split(':')[0].replace(/\n/g,'').replace(/\s/,''),
-            script: String(txt.split('{')[1]).split('}')[0]}) }
-            
-            if(saveArray){
-                saveArray.map(save => {
+            [ lexem, data, saveArray ] = MainFunction( data, lexem )
+
+            if( saveArray ){
+                saveArray.map(
+                    save => {
                     data = data.replaceAll(`<${save.name}>`, save.script)
                 }) 
             }
-            if(data.split('<s>')[1]){lexem.script = String(data.split('<s>')[1]).split('</s>')[0]}
-            if(data.split('<m>')[1]){lexem.html = String(data.split('<m>')[1]).split('</m>')[0]}
-            if(data.split('<st>')[1]){lexem.style = String(data.split('<st>')[1]).split('</st>')[0]}
-            if(data.split('<settings>')[1]){lexem.settings = String(data.split('<settings>')[1]).split('</settings>')[0]}
-            if(data.split('<name>')[1]){lexem.namePage = String(data.split('<name>')[1]).split('</name>')[0]}
-            
+            SimpleTagsDataFunction( lexem, data )
+     
             return lexem
     }
     var lexemArray = new Array();
-    // Разбор кажого файла tml
-    dataArray.map(function(data){
-        const lexem = new Object();
+    // Разбор кажого файла SingleScript
+    dataArray.forEach(
+        data => {
+        let lexem = new Object();
         // importData= Текст внутри тэга "<import>"
-        if(data.split('<import>')[1]){const importData = String(data.split('<import>')[1]).split('</import>')[0]; 
-        lexem.import = new Array();
-        importData.replace(/\n/g, ';').split(";").map(function (importStr){
-            if(!importStr.replace(/\n/g,'').replace(/\s/g, '')) {return}
-            const OneImport = new Object(null);
-            if( importStr.split(":").length ) { OneImport.name = importStr.split(':')[0].replace(':', '').replace(/\s/g,''); }
-            if( importStr.split("'").length ) {
-                OneImport.path = importStr.split("'")[1]
-                lexem.import.push(OneImport);
-            }    
-        })
-        
-        }
-        
-        if(data.split('<save>')[1]){if(!saveArray){var saveArray = new Array()}
-
-        
-            const txt = String(data.split('<save>')[1]).split('</save>')[0];
-            txt.split('save').map(oneSave => {
+        if( data.split('<import>'[1]) ) [ data, lexem ] = ReadImports( data, lexem )
+        [ lexem, data, saveArray ] = MainFunction( data, lexem )
             
-                saveArray.push({name: oneSave.split(':')[0].replace(/\n/g,'').replace(/\s/g,''),
-                script: oneSave.split('|')[1]})
-            })
-            
-            }
-            
-            
-            if(saveArray){
-                saveArray.map(save => {
-                    data = data.replaceAll(`<${save.name}>`, save.script)
-                    dataArray.map(function(oneEl){  
+            if( saveArray ) {
+                saveArray.forEach(
+                    save => {
+                    data = data.replaceAll( `<${save.name}>`, save.script )
+                    dataArray.forEach(
+                        oneEl => {  
                         dataArray.push(oneEl.replaceAll(`<${save.name}>`, save.script))
                         dataArray.shift()
                     }) 
-                }) 
-            }
-            if(data.split('<var>')[1]){
-                const txt = String(data.split('<var>')[1]).split('</var>')[0]
-                lexem.variable = new Array()
-                txt.replace(/\n/g,';').split(';').forEach(variable => {
-                    if(variable.split(':')[0].replace(/\s/g,'')){
-                        lexem.variable.push({name: variable.split(':')[0].replace(/\s/g,''),
-                content: String(variable.split(':')[1]).split('|')[0], type: variable.split('|')[1]
                 })
-                    }
-                    
-                })
-                console.log(lexem.variable)
             }
-            if(data.split('<s>')[1]){lexem.script = String(data.split('<s>')[1]).split('</s>')[0]}
-            if(data.split('<m>')[1]){lexem.html = String(data.split('<m>')[1]).split('</m>')[0]}
-            if(data.split('<st>')[1]){lexem.style = String(data.split('<st>')[1]).split('</st>')[0]}
-            if(data.split('<settings>')[1]){lexem.settings = String(data.split('<settings>')[1]).split('</settings>')[0]}
-            if(data.split('<name>')[1]){lexem.namePage = String(data.split('<name>')[1]).split('</name>')[0]}
+            lexem = SimpleTagsDataFunction( lexem, data )
         lexemArray.push(lexem)
-        if(lexemArray.length === dataArray.length){;Parser(lexemArray, )}
+        if(lexemArray.length === dataArray.length) Parser( lexemArray )
     
     })
 }

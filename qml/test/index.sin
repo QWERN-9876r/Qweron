@@ -17,7 +17,7 @@
     <h4>Page4</h4>
 </nav>
 </div>|
-save topStyle: |.top {
+^^ topStyle: |.top {
         position: fixed;
         left: 0;
         top: 0;
@@ -92,7 +92,6 @@ nav h4 {
             <h1 class="c_Counter c_Color">|Counter|</h1>
             <button id="btn" class="c_Counter c_Color">button</button>
         </div>
-        
     </div> 
     
 </m>
@@ -105,7 +104,6 @@ function plusCounte() {
     |Color| = 'blue'
     |What| = |What| + ' what'
 }
-
  
  const what = 'what'
  |ph| document.getElementById('btn').onclick = plusCounte

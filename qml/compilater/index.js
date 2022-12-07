@@ -41,8 +41,3 @@ fs.readFile('../test/index.sin', 'utf-8', function(err, data){
     
     
 })
-
-// target[prop] = value;
-//     console.log('W');
-//     target[prop].Update()
-

@@ -12,8 +12,8 @@ function Parser(lexemArray) {
             }
             if(typeof onOff == 'boolean') {
                 var Settings=new Object(null);
-                if(lexem.settings.split('ErrorMessages:')[1]){Settings.ErrorMessages = onOff;}
-                if(lexem.settings.split('WarningMessages:')[1]){Settings.WarningMessages = onOff;}
+                if(lexem.settings.split('ErrorMessages:')[1]) Settings.ErrorMessages = onOff;
+                if(lexem.settings.split('WarningMessages:')[1]) Settings.WarningMessages = onOff;
 
             }
         }else {if(lexem.settings && lexem.settings.replace(/\s/g,'').replaceAll(/\n/g,'')){JST = `${JST}throw new Error('|  ${lexem.settings}  | --> are not settings');`}}

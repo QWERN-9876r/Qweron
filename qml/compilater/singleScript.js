@@ -7,7 +7,6 @@ function plusCounte() {
     variables.Color.valueOf = 'blue'
     variables.What.valueOf = variables.What.valueOf + ' what'
 }
-
  
  const what = 'what'
   document.getElementById('btn').onclick = plusCounte

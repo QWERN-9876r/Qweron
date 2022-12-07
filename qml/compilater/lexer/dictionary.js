@@ -1,0 +1,1 @@
+module.exports.SimpleTags = [ 's', 'm', 'st', 'settings', 'name' ]
