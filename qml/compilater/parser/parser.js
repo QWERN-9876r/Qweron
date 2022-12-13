@@ -1,5 +1,6 @@
 const fs = require('fs'),
- Settings = require('./Settings').Settings;
+ Settings = require('./Settings').Settings,
+ PostHtml = require('./Post html').PostHtml
 var JSA = new Array();  // JavaScript Array
 
 function Parser(lexemArray) {
@@ -7,11 +8,11 @@ function Parser(lexemArray) {
         function( lexem ) {
         let JST = '';
         // ______________ Settings __________________
-        if( lexem.settings && lexem.settings.split(':')[1] ){
+        if ( lexem.settings && lexem.settings.split(':')[1] ){
             [ lexem, JST ] = Settings( lexem, JST )
         }else {if(lexem.settings && lexem.settings.replace(/\s/g,'').replaceAll(/\n/g,'')){JST = `${JST}throw new Error('|  ${lexem.settings}  | --> are not settings');`}}
         // ______________ variables __________________
-        if(lexem.variable){ 
+        if ( lexem.variable ){ 
             
             lexem.variable.map(function(v){
                 lexem.script = lexem.script.replaceAll(`|${v.name}.Update()|`,`variables.${v.name}.Update()`)
@@ -21,34 +22,16 @@ function Parser(lexemArray) {
             
         }
         // ______________ Script __________________
-        if(lexem.script){
-            if(lexem.script.split('|ph|')[1]){
-                
-                var phArray = new Array(),
-                 ST = ''
-                lexem.script.split(';').forEach(function(str){
-                    if(str.split('{').length === str.split('}').length){
-                        if(str.split('(').length === str.split(')').length ){
-                            if(!str.split(',')[1]){
-                                str.replaceAll(/\n/g,'')
-                            }
-                        }
-                    }
-                    if(str.split('|ph|')[1]){phArray.push(str.replace('|ph|', '') + ';')}else {
-                        if(str.replace(/\s/g,'')) {
-                            ST = ST + str + ';'
-                        }
-                        
-                    }
-                })
-            }
+        if ( lexem.script ) {
+            if ( lexem.script.split('|ph|')[1] ) [ ST, phArray ] = PostHtml( lexem )
             JST = JST + ST
         }
         // ______________ Markup and styles  __________________
         
-        if(lexem.html && !lexem.style){JST = JST + `document.getElementById("home").innerHTML = '${lexem.html.replaceAll(/\n/g,'').replaceAll(/\s+/g,' ')}';`}
-        if(lexem.style){JST = JST + `document.getElementById("home").innerHTML = '${lexem.html.replaceAll(/\n/g,'').replaceAll(/\s+/g,' ')}<style>${lexem.style.replace(/\n/g,'').replaceAll(/\s+/g,' ')}</style>';`}
-        if(phArray){JST = JST + String(phArray).replaceAll(',','').replaceAll('|ph|','')}
+        if ( lexem.html && !lexem.style ) JST = JST + `document.getElementById("home").innerHTML = '${lexem.html.replaceAll(/\n/g,'').replaceAll(/\s+/g,' ')}';`
+        if ( lexem.style ) JST = JST + 
+        `document.getElementById("home").innerHTML = '${lexem.html.replaceAll(/\n/g,'').replaceAll(/\s+/g,' ')}<style>${lexem.style.replace(/\n/g,'').replaceAll(/\s+/g,' ')}</style>';`
+        if ( phArray ) JST = JST + String(phArray).replaceAll(',','').replaceAll('|ph|','')
         
             
         
@@ -56,7 +39,7 @@ function Parser(lexemArray) {
     JSA.push(JST)
     })
     // ______________ One page __________________
-    if(!lexemArray[0].import){return JSA[0]}
+    if ( !lexemArray[0].import ) return JSA[0]
     var pageName
     // ______________ Many pages __________________
     if(lexemArray[0].namePage.replace(/\n/g,'').replace(/\s/g, '') &&
@@ -67,7 +50,8 @@ function Parser(lexemArray) {
     var index = lexemArray[0].import.length - 1;
     // ______________ VariablesArray __________________
     variablesArray = new Array()
-        lexemArray.map(lexem => {
+        lexemArray.map(
+            lexem => {
         if(lexem.variable){
             lexem.variable.map(v => {
                 variablesArray.push(`${v.name}: new Proxy({valueOf: ${v.content}, type: '${v.type}', Update(){Array.from(document.getElementsByClassName('c_${v.name}')).forEach(function(el){el.${v.type} = variables.${v.name}.valueOf})}},{set(target,prop,value){target[prop] = value;target.Update()}})`)
@@ -87,7 +71,7 @@ function Parser(lexemArray) {
     })}
     */${pageName}()
     ` , function(err){if(err){throw err}})
-    
+    console.log('\x1b[1m', "\x1b[35m", 'YEEEEEEEEEEEEEEES!!!')
 }
 
 module.exports.Parser = Parser
