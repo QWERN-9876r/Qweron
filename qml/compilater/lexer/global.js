@@ -3,16 +3,15 @@ function GetTagContent ( tagName, data ) {
 }
 
 module.exports.MainFunction = function( data, lexem ) {
+    var saveArray = new Array()
     if( data.split('<save>')[1] ){
-        if( !saveArray ) var saveArray = new Array()
 
-    
         const txt = GetTagContent( 'save', data )
         txt.split('^^').forEach(
             oneSave => {
             saveArray.push({
                 name: oneSave.split(':')[0].replace(/\n/g,'').replace(/\s/g,''),
-                script: oneSave.split('|')[1]})
+                script: oneSave.split('<|>')[1]})
         })
         
         }
@@ -32,7 +31,6 @@ module.exports.MainFunction = function( data, lexem ) {
                 
             })
         }
-        // Processing simple tags
         return [ lexem, data, saveArray ]
 }
 

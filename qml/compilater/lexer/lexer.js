@@ -26,14 +26,14 @@ function Lexer(dataArray) {
             let data = String(dataArray),
              lexem = new Object();
             if( data.split('<import>'[1]) ) [ data, lexem ] = ReadImports( data, lexem )
-            
+            let saveArray
             [ lexem, data, saveArray ] = MainFunction( data, lexem )
 
-            if( saveArray ){
+            if( saveArray.length ){
                 saveArray.map(
                     save => {
                     data = data.replaceAll(`<${save.name}>`, save.script)
-                }) 
+                })
             }
             SimpleTagsDataFunction( lexem, data )
      
@@ -46,9 +46,10 @@ function Lexer(dataArray) {
         let lexem = new Object();
         // importData= Текст внутри тэга "<import>"
         if( data.split('<import>'[1]) ) [ data, lexem ] = ReadImports( data, lexem )
+        let saveArray;
         [ lexem, data, saveArray ] = MainFunction( data, lexem )
             
-            if( saveArray ) {
+            if( saveArray.length ) {
                 saveArray.forEach(
                     save => {
                     data = data.replaceAll( `<${save.name}>`, save.script )

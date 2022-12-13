@@ -1,10 +1,15 @@
 <m>
 <div class="container">
     <top>
-    <p>The main idea of SingleScript is to combine a large number of modules under a single standard, as well as optimize their work and combine all pages around the main page. SingleScript creates a single-page application. It is easy to learn because it uses html css and js, but at the same time adds a large number of solutions. Also in SingleScript, all files and pages are not separated and form a single structure in which all pages interact with each other without barriers. When creating a project, the language combines all the pages around the main one, most of the program is enclosed in it, and the remaining pages are very light and at the same time cannot exist without the main one, which gives them reused parts of the code and other data.</p>
+    <main>
+        <p>The main idea of SingleScript is to combine a large number of modules under a single standard, as well as optimize their work and combine all pages around the main page. SingleScript creates a single-page application. It is easy to learn because it uses html css and js, but at the same time adds a large number of solutions. Also in SingleScript, all files and pages are not separated and form a single structure in which all pages interact with each other without barriers. When creating a project, the language combines all the pages around the main one, most of the program is enclosed in it, and the remaining pages are very light and at the same time cannot exist without the main one, which gives them reused parts of the code and other data.</p>
+    </main>
     
 </div> 
 </m>
 <st>
     <topStyle>
+    main {
+      display: flex;  
+    }
 </st>

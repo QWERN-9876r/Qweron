@@ -9,15 +9,16 @@
  Color: 'red' |style.color|
  What: 'what' |textContent|
 </var>
-<save> top: |<div class="top">
+<save> top: <|> <div class="top">
 <nav>
     <h4 onclick="About()">About</h4>
     <h4 onclick="Documentation()">Documentation</h4>
     <h4 onclick="__Main__()">Page3</h4>
     <h4>Page4</h4>
 </nav>
-</div>|
-^^ topStyle: |.top {
+</div>
+<|>
+^^ topStyle: <|>.top {
         position: fixed;
         left: 0;
         top: 0;
@@ -77,7 +78,7 @@ nav h4 {
     top: 70%;
     font-family: sans-serif;
 }
-|</save>
+</save>
 
 <name>  __Main__  </name>
 <m>
@@ -111,6 +112,4 @@ function plusCounte() {
  
 </s>
 
-<st>
-    <topStyle>
-</st>
+<st> <topStyle> </st>

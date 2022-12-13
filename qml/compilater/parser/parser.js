@@ -1,21 +1,14 @@
-const fs = require('fs');
+const fs = require('fs'),
+ Settings = require('./Settings').Settings;
 var JSA = new Array();  // JavaScript Array
 
 function Parser(lexemArray) {
-    lexemArray.map(function(lexem){
+    lexemArray.map(
+        function( lexem ) {
         let JST = '';
         // ______________ Settings __________________
         if( lexem.settings && lexem.settings.split(':')[1] ){
-            let onOff = lexem.settings.split(':')[1].replaceAll(/\n/g, ';').split(';')[0].replaceAll(/\n/g, '').replaceAll(/\s/g, '');
-            if(onOff === 'on'){onOff = true}else{
-                if(onOff === 'off'){onOff = false}else {JST = `${JST}throw new Error('|  ${lexem.settings}  | --> In the settings, you can specify only on/off');`}
-            }
-            if(typeof onOff == 'boolean') {
-                var Settings=new Object(null);
-                if(lexem.settings.split('ErrorMessages:')[1]) Settings.ErrorMessages = onOff;
-                if(lexem.settings.split('WarningMessages:')[1]) Settings.WarningMessages = onOff;
-
-            }
+            [ lexem, JST ] = Settings( lexem, JST )
         }else {if(lexem.settings && lexem.settings.replace(/\s/g,'').replaceAll(/\n/g,'')){JST = `${JST}throw new Error('|  ${lexem.settings}  | --> are not settings');`}}
         // ______________ variables __________________
         if(lexem.variable){ 
